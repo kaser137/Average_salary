@@ -33,14 +33,15 @@ def predict_rub_salary(api_url, target_vacancy, app_code=None, app_key=None, api
                    'text': f'{target_vacancy}'}
         response = requests.get(url, params=payload)
         response.raise_for_status()
+        json_answer = response.json()
         if app_code:
-            resp_json_list = response.json()['objects']
-            vac_found_number = response.json()['total']
+            resp_json_list = json_answer['objects']
+            vac_found_number = json_answer()['total']
             pay_from = 'payment_from'
             pay_to = 'payment_to'
         else:
-            resp_json_list = response.json()['items']
-            vac_found_number = response.json()['found']
+            resp_json_list = json_answer['items']
+            vac_found_number = json_answer['found']
             pay_from = 'from'
             pay_to = 'to'
         for vacancy in resp_json_list:
