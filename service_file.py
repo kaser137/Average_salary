@@ -60,21 +60,21 @@ def predict_rub_salary(api_url, target_vacancy, app_code=None, app_key=None, api
 
 
 def calculus_vacancies(url, langs_list, app_code=None, app_key=None, api_page=1):
-    vac_dict = {}
+    vacancies= {}
     for lang in langs_list:
         average_salary, vacancies_processed, vacancies_found = predict_rub_salary(url, f'программист {lang}', app_code,
                                                                                   app_key, api_page)
         vac_dict[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
                           'average_salary': average_salary}
-    return vac_dict
+    return vacancies
 
 
-def draw_table(user_dict, title):
+def draw_table(user_dictionary, title):
     table_data = []
     heading = ['Язык программирования', 'Вакансий найдено ', 'Вакансий обработано', 'Средняя зарплата ']
     table_data.append(heading)
-    for key in user_dict:
-        table_data.append([item for item in user_dict[key].values()])
+    for key in user_dictionary:
+        table_data.append([item for item in user_dictionary[key].values()])
         table_data[-1].insert(0, key)
     title = title
     table = AsciiTable(table_data, title)

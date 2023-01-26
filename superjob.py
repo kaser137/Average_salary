@@ -11,8 +11,8 @@ def main():
     url = 'https://api.superjob.ru/2.0/vacancies/'
     langs_list = ['JavaScript', 'Java', 'Python', 'Ruby', 'PHP', 'C++', 'C#', 'C', 'Go',
                   'Shell', 'Objective-C', 'Scala', 'Swift', 'TypeScript']
-    vacancies_dict = calculus_vacancies(url, langs_list, app_code, app_key, 5)
-    draw_table(vacancies_dict, 'Analysing vacancies. SuperJob. Moscow')
+    vacancies = calculus_vacancies(url, langs_list, app_code, app_key, 5)
+    draw_table(vacancies, 'Analysing vacancies. SuperJob. Moscow')
 
 
 if __name__ == '__main__':
