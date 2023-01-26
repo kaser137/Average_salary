@@ -1,7 +1,7 @@
 import os
 import dotenv
 from pathlib import Path
-from service_file import calculus_vacancies, draw_table
+from service_file import get_stats_vacancies, draw_table
 
 
 def main():
@@ -11,7 +11,7 @@ def main():
     url = 'https://api.superjob.ru/2.0/vacancies/'
     langs_list = ['JavaScript', 'Java', 'Python', 'Ruby', 'PHP', 'C++', 'C#', 'C', 'Go',
                   'Shell', 'Objective-C', 'Scala', 'Swift', 'TypeScript']
-    vacancies = calculus_vacancies(url, langs_list, app_code, app_key, 5)
+    vacancies = get_stats_vacancies(url, langs_list, app_code, app_key, 5)
     draw_table(vacancies, 'Analysing vacancies. SuperJob. Moscow')
 
 

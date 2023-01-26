@@ -59,13 +59,13 @@ def predict_rub_salary(api_url, target_vacancy, app_code=None, app_key=None, api
         return 0, 0, vac_found_number
 
 
-def calculus_vacancies(url, langs_list, app_code=None, app_key=None, api_page=1):
-    vacancies= {}
+def get_stats_vacancies(url, langs_list, app_code=None, app_key=None, api_page=1):
+    vacancies = {}
     for lang in langs_list:
         average_salary, vacancies_processed, vacancies_found = predict_rub_salary(url, f'программист {lang}', app_code,
                                                                                   app_key, api_page)
-        vac_dict[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
-                          'average_salary': average_salary}
+        vacancies[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
+                           'average_salary': average_salary}
     return vacancies
 
 
