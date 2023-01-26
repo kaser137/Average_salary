@@ -18,14 +18,18 @@ def choice_for_average_salary(vac_attr_list, pay_from, pay_to):
 
 
 def predict_rub_salary(api_url, target_vacancy, app_code=None, app_key=None, api_page=1):
+    page = 0
+    per_page = 100
+    count = 100
+    town = 4
+    area = 1
+    vac_found_number = 0
     vac_number = 0
     total_sum = 0
-    page = 0
-    vac_found_number = 0
     url = api_url
     while page < api_page:
-        payload = {'code': app_code, 'app_key': app_key, 'town': 4, 'count': 100, 'keyword': f'{target_vacancy}',
-                   'page': f'{page}', 'per_page': 100, 'area': 1, 'vacancy_search_fields': 'name',
+        payload = {'code': app_code, 'app_key': app_key, 'town': town, 'count': count, 'keyword': f'{target_vacancy}',
+                   'page': f'{page}', 'per_page': per_page, 'area': area, 'vacancy_search_fields': 'name',
                    'text': f'{target_vacancy}'}
         response = requests.get(url, params=payload)
         response.raise_for_status()
