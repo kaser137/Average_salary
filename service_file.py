@@ -79,15 +79,21 @@ def predict_rub_salary_sj(api_url, target_vacancy, app_code=None, app_key=None, 
         return 0, 0, vacancies_found_quantity
 
 
-def get_stats_vacancies(url, langs_list, app_code=None, app_key=None, api_page=1):
+def get_stats_vacancies_hh(url, langs_list, api_page=20):
     vacancies = {}
     for lang in langs_list:
-        if app_code:
-            average_salary, vacancies_processed, vacancies_found = predict_rub_salary_sj(url, f'программист {lang}',
-                                                                                         app_code, app_key, api_page)
-        else:
-            average_salary, vacancies_processed, vacancies_found = predict_rub_salary_hh(url, f'программист {lang}',
-                                                                                         api_page)
+        average_salary, vacancies_processed, vacancies_found = predict_rub_salary_hh(url, f'программист {lang}',
+                                                                                     api_page)
+        vacancies[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
+                           'average_salary': average_salary}
+    return vacancies
+
+
+def get_stats_vacancies_sj(url, langs_list, app_code=None, app_key=None, api_page=5):
+    vacancies = {}
+    for lang in langs_list:
+        average_salary, vacancies_processed, vacancies_found = predict_rub_salary_sj(url, f'программист {lang}',
+                                                                                     app_code, app_key, api_page)
         vacancies[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
                            'average_salary': average_salary}
     return vacancies
