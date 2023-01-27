@@ -95,12 +95,12 @@ def get_stats_vacancies_sj(url, langs, app_code=None, app_key=None, api_page=5):
 
 
 def draw_table(user_dictionary, title):
-    table_data_list = []
+    table_vacancies_data = []
     heading = ['Язык программирования', 'Вакансий найдено ', 'Вакансий обработано', 'Средняя зарплата ']
-    table_data_list.append(heading)
-    for key in user_dictionary:
-        table_data_list.append([item for item in user_dictionary[key].values()])
-        table_data_list[-1].insert(0, key)
+    table_vacancies_data.append(heading)
+    for language in user_dictionary:
+        table_vacancies_data.append([item for item in user_dictionary[language].values()])
+        table_vacancies_data[-1].insert(0, language)
     title = title
-    table = AsciiTable(table_data_list, title).table
+    table = AsciiTable(table_vacancies_data, title).table
     return table
