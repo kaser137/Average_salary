@@ -3,15 +3,14 @@ from terminaltables import AsciiTable
 
 
 def choice_for_average_salary(vacancy_attr_list, pay_from, pay_to):
-    if vacancy_attr_list['currency'] in ("RUR", 'rub', None):
-        if vacancy_attr_list[pay_from] and vacancy_attr_list[pay_to]:
-            salary = (vacancy_attr_list[pay_from] + vacancy_attr_list[pay_to]) / 2
-        elif vacancy_attr_list[pay_from]:
-            salary = vacancy_attr_list[pay_from] * 1.2
-        elif vacancy_attr_list[pay_to]:
-            salary = vacancy_attr_list[pay_to] * 0.8
-        else:
-            salary = None
+    if vacancy_attr_list['currency'] not in ("RUR", 'rub', None):
+        return None
+    if vacancy_attr_list[pay_from] and vacancy_attr_list[pay_to]:
+        salary = (vacancy_attr_list[pay_from] + vacancy_attr_list[pay_to]) / 2
+    elif vacancy_attr_list[pay_from]:
+        salary = vacancy_attr_list[pay_from] * 1.2
+    elif vacancy_attr_list[pay_to]:
+        salary = vacancy_attr_list[pay_to] * 0.8
     else:
         salary = None
     return salary
