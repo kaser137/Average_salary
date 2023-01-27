@@ -34,11 +34,7 @@ def predict_rub_salary_hh(api_url, target_vacancy, api_page=20):
         vacancies_found_quantity = json_answer['found']
         for vacancy in resp_json_list:
             if vacancy['salary']:
-                vac_attr_list = vacancy['salary']
-            else:
-                vac_attr_list = None
-            if vac_attr_list:
-                salary = choice_for_average_salary(vac_attr_list, 'from', 'to')
+                salary = choice_for_average_salary(vacancy['salary'], 'from', 'to')
                 if salary:
                     total_sum += salary
                     vacancies_quantity += 1
@@ -66,9 +62,8 @@ def predict_rub_salary_sj(api_url, target_vacancy, app_code=None, app_key=None, 
         resp_json_list = json_answer['objects']
         vacancies_found_quantity = json_answer['total']
         for vacancy in resp_json_list:
-            vac_attr_list = vacancy
-            if vac_attr_list:
-                salary = choice_for_average_salary(vac_attr_list, 'payment_from', 'payment_to')
+            if vacancy:
+                salary = choice_for_average_salary(vacancy, 'payment_from', 'payment_to')
                 if salary:
                     total_sum += salary
                     vacancies_quantity += 1
