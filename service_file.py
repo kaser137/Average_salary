@@ -101,5 +101,5 @@ def draw_table(user_dictionary, title):
         table_data_list.append([item for item in user_dictionary[key].values()])
         table_data_list[-1].insert(0, key)
     title = title
-    table = AsciiTable(table_data_list, title)
-    print('\n', table.table)
+    table = AsciiTable(table_data_list, title).table
+    return table

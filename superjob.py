@@ -12,7 +12,7 @@ def main():
     langs_list = ['JavaScript', 'Java', 'Python', 'Ruby', 'PHP', 'C++', 'C#', 'C', 'Go',
                   'Shell', 'Objective-C', 'Scala', 'Swift', 'TypeScript']
     vacancies = get_stats_vacancies(url, langs_list, app_code, app_key, 5)
-    draw_table(vacancies, 'Analysing vacancies. SuperJob. Moscow')
+    print(draw_table(vacancies, 'Analysing vacancies. SuperJob. Moscow'))
 
 
 if __name__ == '__main__':
