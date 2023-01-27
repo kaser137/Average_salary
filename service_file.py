@@ -29,9 +29,9 @@ def predict_rub_salary_hh(api_url, target_vacancy, api_page=20):
                    'text': f'{target_vacancy}'}
         response = requests.get(url, params=payload)
         response.raise_for_status()
-        json_answer = response.json()
-        resp_json_list = json_answer['items']
-        vacancies_found_quantity = json_answer['found']
+        answer = response.json()
+        resp_json_list = answer['items']
+        vacancies_found_quantity = answer['found']
         for vacancy in resp_json_list:
             if vacancy['salary']:
                 salary = choice_for_average_salary(vacancy['salary'], 'from', 'to')
@@ -58,9 +58,9 @@ def predict_rub_salary_sj(api_url, target_vacancy, app_code=None, app_key=None, 
                    'page': f'{page}'}
         response = requests.get(url, params=payload)
         response.raise_for_status()
-        json_answer = response.json()
-        resp_json_list = json_answer['objects']
-        vacancies_found_quantity = json_answer['total']
+        answer = response.json()
+        resp_json_list = answer['objects']
+        vacancies_found_quantity = answer['total']
         for vacancy in resp_json_list:
             if vacancy:
                 salary = choice_for_average_salary(vacancy, 'payment_from', 'payment_to')
