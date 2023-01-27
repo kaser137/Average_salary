@@ -2,15 +2,15 @@ import requests
 from terminaltables import AsciiTable
 
 
-def choice_for_average_salary(vacancy_attr_list, pay_from, pay_to):
-    if vacancy_attr_list['currency'] not in ("RUR", 'rub', None):
+def choice_for_average_salary(vacancy_attrs, pay_from, pay_to):
+    if vacancy_attrs['currency'] not in ("RUR", 'rub', None):
         return None
-    if vacancy_attr_list[pay_from] and vacancy_attr_list[pay_to]:
-        salary = (vacancy_attr_list[pay_from] + vacancy_attr_list[pay_to]) / 2
-    elif vacancy_attr_list[pay_from]:
-        salary = vacancy_attr_list[pay_from] * 1.2
-    elif vacancy_attr_list[pay_to]:
-        salary = vacancy_attr_list[pay_to] * 0.8
+    if vacancy_attrs[pay_from] and vacancy_attrs[pay_to]:
+        salary = (vacancy_attrs[pay_from] + vacancy_attrs[pay_to]) / 2
+    elif vacancy_attrs[pay_from]:
+        salary = vacancy_attrs[pay_from] * 1.2
+    elif vacancy_attrs[pay_to]:
+        salary = vacancy_attrs[pay_to] * 0.8
     else:
         salary = None
     return salary
@@ -30,9 +30,9 @@ def predict_rub_salary_hh(api_url, target_vacancy, api_page=20):
         response = requests.get(url, params=payload)
         response.raise_for_status()
         answer = response.json()
-        resp_json_list = answer['items']
+        vacancy_attrs = answer['items']
         vacancies_found_quantity = answer['found']
-        for vacancy in resp_json_list:
+        for vacancy in vacancy_attrs:
             if vacancy['salary']:
                 salary = choice_for_average_salary(vacancy['salary'], 'from', 'to')
                 if salary:
@@ -59,9 +59,9 @@ def predict_rub_salary_sj(api_url, target_vacancy, app_code=None, app_key=None, 
         response = requests.get(url, params=payload)
         response.raise_for_status()
         answer = response.json()
-        resp_json_list = answer['objects']
+        vacancy_attrs = answer['objects']
         vacancies_found_quantity = answer['total']
-        for vacancy in resp_json_list:
+        for vacancy in vacancy_attrs:
             if vacancy:
                 salary = choice_for_average_salary(vacancy, 'payment_from', 'payment_to')
                 if salary:
@@ -84,9 +84,9 @@ def get_stats_vacancies_hh(url, langs_list, api_page=20):
     return vacancies
 
 
-def get_stats_vacancies_sj(url, langs_list, app_code=None, app_key=None, api_page=5):
+def get_stats_vacancies_sj(url, langs, app_code=None, app_key=None, api_page=5):
     vacancies = {}
-    for lang in langs_list:
+    for lang in langs:
         average_salary, vacancies_processed, vacancies_found = predict_rub_salary_sj(url, f'программист {lang}',
                                                                                      app_code, app_key, api_page)
         vacancies[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
