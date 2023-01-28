@@ -94,13 +94,13 @@ def get_stats_vacancies_sj(url, langs, app_code=None, app_key=None, api_page=5):
     return vacancies_stats
 
 
-def draw_table(user_dictionary, title):
-    table_vacancies_data = []
+def draw_table(vacancies_stats, title):
+    aggregate_indicators = []
     heading = ['Язык программирования', 'Вакансий найдено ', 'Вакансий обработано', 'Средняя зарплата ']
-    table_vacancies_data.append(heading)
-    for language in user_dictionary:
-        table_vacancies_data.append([item for item in user_dictionary[language].values()])
-        table_vacancies_data[-1].insert(0, language)
+    aggregate_indicators.append(heading)
+    for language in vacancies_stats:
+        aggregate_indicators.append([item for item in vacancies_stats[language].values()])
+        aggregate_indicators[-1].insert(0, language)
     title = title
-    table = AsciiTable(table_vacancies_data, title).table
+    table = AsciiTable(aggregate_indicators, title).table
     return table
