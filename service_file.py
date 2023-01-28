@@ -75,23 +75,23 @@ def predict_rub_salary_sj(api_url, target_vacancy, app_code=None, app_key=None, 
 
 
 def get_stats_vacancies_hh(url, languages, api_page=20):
-    vacancies = {}
+    vacancies_stats = {}
     for lang in languages:
         average_salary, vacancies_processed, vacancies_found = predict_rub_salary_hh(url, f'программист {lang}',
                                                                                      api_page)
-        vacancies[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
-                           'average_salary': average_salary}
-    return vacancies
+        vacancies_stats[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
+                                 'average_salary': average_salary}
+    return vacancies_stats
 
 
 def get_stats_vacancies_sj(url, langs, app_code=None, app_key=None, api_page=5):
-    vacancies = {}
+    vacancies_stats = {}
     for lang in langs:
         average_salary, vacancies_processed, vacancies_found = predict_rub_salary_sj(url, f'программист {lang}',
                                                                                      app_code, app_key, api_page)
-        vacancies[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
-                           'average_salary': average_salary}
-    return vacancies
+        vacancies_stats[lang] = {'vacancies_found': vacancies_found, 'vacancies_processed': vacancies_processed,
+                                 'average_salary': average_salary}
+    return vacancies_stats
 
 
 def draw_table(user_dictionary, title):
