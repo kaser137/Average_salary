@@ -33,11 +33,12 @@ def predict_rub_salary_hh(api_url, target_vacancy, api_page=20):
         vacancy_attrs = answer['items']
         vacancies_found_quantity = answer['found']
         for vacancy in vacancy_attrs:
-            if vacancy['salary']:
-                salary = choice_for_average_salary(vacancy['salary'], 'from', 'to')
-                if salary:
-                    total_sum += salary
-                    vacancies_quantity += 1
+            if not vacancy['salary']:
+                continue
+            salary = choice_for_average_salary(vacancy['salary'], 'from', 'to')
+            if salary:
+                total_sum += salary
+                vacancies_quantity += 1
         page += 1
     if vacancies_quantity:
         return int(total_sum / vacancies_quantity), vacancies_quantity, vacancies_found_quantity
@@ -62,11 +63,10 @@ def predict_rub_salary_sj(api_url, target_vacancy, app_code=None, app_key=None, 
         vacancy_attrs = answer['objects']
         vacancies_found_quantity = answer['total']
         for vacancy in vacancy_attrs:
-            if vacancy:
-                salary = choice_for_average_salary(vacancy, 'payment_from', 'payment_to')
-                if salary:
-                    total_sum += salary
-                    vacancies_quantity += 1
+            salary = choice_for_average_salary(vacancy, 'payment_from', 'payment_to')
+            if salary:
+                total_sum += salary
+                vacancies_quantity += 1
         page += 1
     if vacancies_quantity:
         return int(total_sum / vacancies_quantity), vacancies_quantity, vacancies_found_quantity
