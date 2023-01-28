@@ -19,13 +19,18 @@ you can take after registration at address: https://api.superjob.ru/register/, y
 any site,  it will be correctly.
 
 Python3 should  already be installed. Then use pip (or pip3, if there is a conflict with Python2) to install
-dependencies: `pip install -r requirements.txt`
+dependencies (in commandline):
+```commandline
+pip install -r requirements.txt
+```
 
 Start file `main.py`, it makes 2 tables in your console, first table is info from HeadHunter, second - from SuperJob.
 Program analyse vacancies for programmers in Moscow.
 
-For example, type in terminal in working directory of project: `python main.py` 
-
+For example, type in terminal in working directory of project: 
+```python
+python main.py
+```
 If you want to change region change variable 'area' in `predict_rub_salary_hh` according to tree of areas at 
 address: https://api.hh.ru/areas, and varable 'town' in `predict_rub_salary_sj` which you can find at 
 address: https://api.superjob.ru/2.0/towns/, all info presented in JSON format.
@@ -33,9 +38,13 @@ address: https://api.superjob.ru/2.0/towns/, all info presented in JSON format.
 You also can start program only for HeadHunter, or only forSuperJob, you have to start files `hh.py` or `superjob.py`
 respectively. 
 
-For example: `python hh.py` or `python superjob.py`
-
-
-
+For example:
+```python
+python hh.py
+```
+or
+```python
+python superjob.py
+```
 
 Код написан в образовательных целях на курсах для веб-разработчиков [dvmn.org](https://dvmn.org/).
